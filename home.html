@@ -1,1 +1,491 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>creative atelier · homepage</title>
+  <style>
+    /* RESET & BASE — sans‑serif, your colours */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #24233;        /* primary (dark) */
+      color: #EDE7DB;                  /* text */
+      font-family: 'Trebuchet MS', 'Helvetica', 'Arial', 'Roboto', sans-serif;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    a {
+      text-decoration: none;
+      color: #EDE7DB;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: #D1B52A;                  /* secondary gold */
+    }
+
+    /* container for consistent padding */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ===== SIDE MENU (three‑line toggle) ===== */
+    .menu-wrapper {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      z-index: 1000;
+    }
+
+    /* hamburger icon — three lines */
+    .menu-trigger {
+      width: 48px;
+      height: 48px;
+      background: rgba(36, 36, 51, 0.85); /* #24233 with slight transparency */
+      backdrop-filter: blur(4px);
+      border: 2px solid #D1B52A;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .menu-trigger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background-color: #EDE7DB;
+      border-radius: 2px;
+      transition: 0.2s;
+    }
+    .menu-trigger:hover {
+      background: #D1B52A;
+    }
+    .menu-trigger:hover span {
+      background-color: #24233;
+    }
+
+    /* fade menu panel – hidden by default */
+    .menu-panel {
+      position: fixed;
+      top: 6rem;
+      right: 2rem;
+      background: #24233;
+      border: 2px solid #D1B52A;
+      border-radius: 24px;
+      padding: 2rem 2rem 2rem 2.5rem;
+      min-width: 220px;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.6);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s;
+      backdrop-filter: blur(6px);
+      background: rgba(36, 36, 51, 0.95);
+      z-index: 999;
+    }
+    .menu-panel.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .menu-panel ul {
+      list-style: none;
+    }
+    .menu-panel li {
+      margin: 1.2rem 0;
+      font-size: 1.3rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+    .menu-panel a {
+      color: #EDE7DB;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+    }
+    .menu-panel a:hover {
+      border-bottom-color: #D1B52A;
+    }
+
+    /* ===== HERO / LOGO + INTRO ===== */
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      background: linear-gradient(0deg, rgba(36,36,51,0.75), rgba(36,36,51,0.75)), 
+                  url('BACKGROUND HERE') center/cover no-repeat fixed;
+      /* background image placeholder — exactly as requested */
+      background-blend-mode: overlay;
+      padding: 2rem 1rem;
+    }
+
+    /* logo placeholder with bold animation */
+    .logo-area {
+      margin-bottom: 2rem;
+      animation: logoPop 1.4s cubic-bezier(0.21, 1.11, 0.38, 1.19) forwards;
+      transform-origin: center;
+    }
+    @keyframes logoPop {
+      0% { opacity: 0; transform: scale(0.2) rotate(-10deg); filter: blur(6px); }
+      60% { opacity: 1; transform: scale(1.15) rotate(1deg); filter: blur(0); }
+      100% { opacity: 1; transform: scale(1) rotate(0); filter: blur(0); }
+    }
+    .logo-placeholder {
+      background: #D1B52A;
+      color: #24233;
+      font-weight: 800;
+      font-size: 3rem;
+      padding: 1rem 3rem;
+      border-radius: 60px;
+      display: inline-block;
+      letter-spacing: 4px;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.5);
+      border: 4px solid #EDE7DB;
+    }
+    .logo-placeholder small {
+      font-size: 1.2rem;
+      display: block;
+      font-weight: 400;
+      letter-spacing: 2px;
+    }
+
+    .intro-text {
+      max-width: 700px;
+      background: rgba(36,36,51,0.6);
+      backdrop-filter: blur(3px);
+      padding: 2rem 2.5rem;
+      border-radius: 80px 20px 80px 20px;
+      border: 2px solid #D1B52A;
+      margin: 2rem 1rem;
+    }
+    .intro-text p {
+      font-size: 1.5rem;
+      color: #EDE7DB;
+      text-shadow: 2px 2px 0 #24233;
+      font-weight: 300;
+    }
+    .intro-text strong {
+      color: #D1B52A;
+      font-weight: 600;
+    }
+
+    /* ===== TWO FULL‑WIDTH SEGMENT BLOCKS ===== */
+    .segment {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      background: #1e1e2b; /* slightly deeper than primary for contrast */
+      border-top: 3px solid #D1B52A;
+      border-bottom: 3px solid #D1B52A;
+    }
+    .segment.reverse {
+      flex-direction: row-reverse;
+    }
+    .segment-image, .segment-text {
+      flex: 1 1 300px;
+      min-height: 380px;
+    }
+    .segment-image {
+      background: #24233 url('BACKGROUND HERE') center/cover no-repeat;
+      background-blend-mode: soft-light;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #D1B52A;
+      text-shadow: 0 0 5px #24233;
+      border: 6px dashed #D1B52A33;
+    }
+    .segment-image span {
+      background: rgba(36,36,51,0.8);
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      border: 2px solid #EDE7DB;
+      font-size: 1.5rem;
+    }
+    .segment-text {
+      background-color: #24233;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .segment-text h2 {
+      color: #D1B52A;
+      font-size: 2.2rem;
+      margin-bottom: 1.2rem;
+      border-left: 6px solid #D1B52A;
+      padding-left: 1.2rem;
+    }
+    .segment-text p {
+      font-size: 1.3rem;
+      max-width: 500px;
+      color: #EDE7DB;
+    }
+    .segment-text .small-link {
+      margin-top: 1.5rem;
+      font-weight: bold;
+      color: #D1B52A;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* ===== FOOTER with social links & extras ===== */
+    footer {
+      background-color: #0f0f17;
+      border-top: 5px solid #D1B52A;
+      padding: 3rem 1.5rem 2rem;
+      margin-top: 3rem;
+    }
+    .footer-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2.5rem;
+    }
+    .social-links {
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .social-links a {
+      background: #24233;
+      border: 2px solid #D1B52A;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #EDE7DB;
+      transition: 0.25s;
+      font-size: 1rem;
+      text-align: center;
+      line-height: 1.2;
+      padding: 0 5px;
+      word-break: break-word;
+    }
+    .social-links a:hover {
+      background: #D1B52A;
+      color: #24233;
+      transform: translateY(-6px);
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 1.2rem;
+    }
+    .footer-links a {
+      border-bottom: 2px dotted #D1B52A;
+    }
+    .copyright {
+      width: 100%;
+      text-align: center;
+      margin-top: 3rem;
+      opacity: 0.8;
+      font-size: 0.95rem;
+      color: #D1B52A;
+    }
+
+    /* small extras: shipping link repeated, plus additional info */
+    .newsletter-note {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .newsletter-note span {
+      background: #24233;
+      padding: 0.6rem 1.2rem;
+      border-radius: 40px;
+      border: 1px solid #D1B52A;
+      font-size: 0.9rem;
+    }
+
+    /* mobile fine‑tuning */
+    @media (max-width: 680px) {
+      .menu-wrapper { top: 1rem; right: 1rem; }
+      .menu-panel { right: 1rem; left: 1rem; width: auto; }
+      .logo-placeholder { font-size: 2rem; padding: 0.8rem 1.2rem; }
+      .intro-text p { font-size: 1.2rem; }
+      .segment-text h2 { font-size: 1.8rem; }
+      .footer-grid { flex-direction: column; align-items: start; }
+      .social-links { justify-content: center; }
+    }
+    @media (max-width: 480px) {
+      .segment-image span { font-size: 1.2rem; }
+    }
+
+    /* dummy style for .html links (they are normal links) */
+    .menu-panel a:after, .footer-links a:after {
+      content: ".html";
+      font-size: 0.7rem;
+      vertical-align: super;
+      color: #D1B52A;
+      margin-left: 3px;
+      opacity: 0.8;
+    }
+    /* but for social / email we remove the .html suffix via class */
+    .social-links a:after {
+      content: none !important;
+    }
+    /* additional fine detail: shippings and returns link in footer uses .html */
+    .footer-links a.ship-return:after {
+      content: ".html";
+    }
+  </style>
+</head>
+<body>
+
+  <!-- fixed SIDE MENU: three lines toggle -->
+  <div class="menu-wrapper">
+    <div class="menu-trigger" id="menuToggle" aria-label="menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <nav class="menu-panel" id="menuPanel">
+    <ul>
+      <li><a href="home.html">home</a></li>
+      <li><a href="clothing.html">clothing</a></li>
+      <li><a href="printwork.html">printwork</a></li>
+      <li><a href="furniture.html">furniture</a></li>
+      <li><a href="about me.html">about me</a></li>
+      <li><a href="shippings and returns.html">shippings and returns</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO with logo and intro -->
+  <section class="hero">
+    <div class="logo-area">
+      <div class="logo-placeholder">
+        LOGO HERE
+        <small>✦ creative maker ✦</small>
+      </div>
+    </div>
+    <div class="intro-text">
+      <p><strong>original textile & object art</strong> — each piece tells a story.<br>
+      handcrafted in limited series, made to last.</p>
+      <p style="margin-top: 1rem; font-size: 1.2rem;">▼ explore the collections below ▼</p>
+    </div>
+  </section>
+
+  <!-- FIRST SEGMENT: image left, text right -->
+  <div class="segment">
+    <div class="segment-image">
+      <span>📷 IMAGE HERE</span>
+    </div>
+    <div class="segment-text">
+      <h2>wearable stories</h2>
+      <p>dyed, printed and stitched — clothing that holds memory. all pieces are unique and hand‑finished.</p>
+      <div class="small-link"><a href="clothing.html">view clothing →</a></div>
+    </div>
+  </div>
+
+  <!-- SECOND SEGMENT (reversed: image right, text left) -->
+  <div class="segment reverse">
+    <div class="segment-image">
+      <span>🖼️ IMAGE HERE</span>
+    </div>
+    <div class="segment-text">
+      <h2>objects & furniture</h2>
+      <p>from sculptural printwork to functional furniture with an artistic soul. each piece carries the signature of the hand.</p>
+      <div class="small-link"><a href="furniture.html">see furniture & prints →</a></div>
+    </div>
+  </div>
+
+  <!-- extra creative note (could be another section, but feels relevant) -->
+  <div style="max-width: 1000px; margin: 3rem auto; padding: 0 1.5rem; text-align: center;">
+    <p style="color: #D1B52A; font-size: 1.8rem; border-bottom: 3px double; display: inline-block; padding-bottom: 0.5rem;">commission & studio visits</p>
+    <p style="margin-top: 1.5rem;">every work is open for dialogue — get in touch via instagram or email.</p>
+  </div>
+
+  <!-- FOOTER with social spaces and required links -->
+  <footer>
+    <div class="footer-grid">
+      <!-- social spaces: instagram, email, facebook -->
+      <div class="social-links">
+        <a href="instagram.html" target="_blank" rel="noopener">instagram</a>
+        <a href="mailto:studio@example.com">email</a>
+        <a href="facebook.html" target="_blank">facebook</a>
+      </div>
+
+      <!-- additional links: shippings and returns (as text) plus extras -->
+      <div class="footer-links">
+        <a href="shippings and returns.html" class="ship-return">shippings and returns</a>
+        <a href="about me.html">about me</a>
+        <a href="journal.html">journal</a>
+      </div>
+
+      <!-- extra info that feels relevant for a creative seller -->
+      <div class="newsletter-note">
+        <span>✦ ethical shipping ✦</span>
+        <span>📦 made to order</span>
+      </div>
+    </div>
+    <div class="copyright">
+      © 2025 creative atelier — all pieces original<br>
+      background placeholder: 'BACKGROUND HERE' — logo placeholder: 'LOGO HERE'
+    </div>
+  </footer>
+
+  <!-- simple vanilla JS for menu fade in/out -->
+  <script>
+    (function() {
+      const toggleBtn = document.getElementById('menuToggle');
+      const panel = document.getElementById('menuPanel');
+
+      function toggleMenu(e) {
+        e.stopPropagation();
+        panel.classList.toggle('show');
+      }
+
+      // click on hamburger
+      toggleBtn.addEventListener('click', toggleMenu);
+
+      // click outside closes menu (fade out)
+      document.addEventListener('click', function(event) {
+        if (!panel.contains(event.target) && !toggleBtn.contains(event.target)) {
+          panel.classList.remove('show');
+        }
+      });
+
+      // avoid closing when interacting with panel itself
+      panel.addEventListener('click', function(e) {
+        e.stopPropagation(); // keep panel visible if we click inside (but links work)
+      });
+
+      // optional: close on escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          panel.classList.remove('show');
+        }
+      });
+    })();
+  </script>
+
+  <!-- note: all hyperlinks keep '.html' as requested (see :after pseudo in style) -->
+  <!-- background image is set in hero and segment blocks with 'BACKGROUND HERE' placeholder, also logo area includes 'LOGO HERE' placeholder exactly. -->
+</body>
+</html>
